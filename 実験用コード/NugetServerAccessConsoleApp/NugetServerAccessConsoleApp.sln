@@ -3,7 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NugetServerAccessConsoleApp", "NugetServerAccessConsoleApp\NugetServerAccessConsoleApp.csproj", "{9A39A7CA-2658-4F61-9712-7658419DA50D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NugetServerAccessConsoleApp", "NugetServerAccessConsoleApp\NugetServerAccessConsoleApp.csproj", "{9A39A7CA-2658-4F61-9712-7658419DA50D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{3CCCCFF7-4F91-4CF6-AD24-F3E2566A747D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary.NET8", "ClassLibrary.NET8\ClassLibrary.NET8.csproj", "{88EEA275-0B5B-4298-A3BE-5271CD117038}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary.NET2", "ClassLibrary.NET2\ClassLibrary.NET2.csproj", "{08052AF3-D7A5-4E82-9FFF-F6D66C19B765}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary.NET48", "ClassLibrary.NET48\ClassLibrary.NET48.csproj", "{E0CF8C5B-BCEE-4735-B9FC-184449242003}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadNugetPackageFromProjectApp", "ReadNugetPackageFromProjectApp\ReadNugetPackageFromProjectApp.csproj", "{3A2CCC1D-6308-4244-9EF7-D0751767C65F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +25,30 @@ Global
 		{9A39A7CA-2658-4F61-9712-7658419DA50D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A39A7CA-2658-4F61-9712-7658419DA50D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A39A7CA-2658-4F61-9712-7658419DA50D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88EEA275-0B5B-4298-A3BE-5271CD117038}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88EEA275-0B5B-4298-A3BE-5271CD117038}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88EEA275-0B5B-4298-A3BE-5271CD117038}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88EEA275-0B5B-4298-A3BE-5271CD117038}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08052AF3-D7A5-4E82-9FFF-F6D66C19B765}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08052AF3-D7A5-4E82-9FFF-F6D66C19B765}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08052AF3-D7A5-4E82-9FFF-F6D66C19B765}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08052AF3-D7A5-4E82-9FFF-F6D66C19B765}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0CF8C5B-BCEE-4735-B9FC-184449242003}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0CF8C5B-BCEE-4735-B9FC-184449242003}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0CF8C5B-BCEE-4735-B9FC-184449242003}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0CF8C5B-BCEE-4735-B9FC-184449242003}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A2CCC1D-6308-4244-9EF7-D0751767C65F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A2CCC1D-6308-4244-9EF7-D0751767C65F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A2CCC1D-6308-4244-9EF7-D0751767C65F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A2CCC1D-6308-4244-9EF7-D0751767C65F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{88EEA275-0B5B-4298-A3BE-5271CD117038} = {3CCCCFF7-4F91-4CF6-AD24-F3E2566A747D}
+		{08052AF3-D7A5-4E82-9FFF-F6D66C19B765} = {3CCCCFF7-4F91-4CF6-AD24-F3E2566A747D}
+		{E0CF8C5B-BCEE-4735-B9FC-184449242003} = {3CCCCFF7-4F91-4CF6-AD24-F3E2566A747D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {05F60768-3F6F-4509-AA11-7E5953C9F638}
