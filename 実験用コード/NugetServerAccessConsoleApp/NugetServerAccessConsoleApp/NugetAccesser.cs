@@ -22,48 +22,38 @@ internal class NugetAccesser(string source, ILogger logger)
 
     public async Task<IEnumerable<NuGetVersion>> GetVersionsAsync(string packageId)
     {
-        var pack = await GetRequestPackAsync<FindPackageByIdResource>();
-        return await pack.Resource.GetAllVersionsAsync(packageId, _cahge, _logger, pack.CancellationToken);
+        var resource = await _repository.GetResourceAsync<FindPackageByIdResource>();
+        return await resource.GetAllVersionsAsync(packageId, _cahge, _logger, CancellationToken.None);
     }
 
     public async Task<NuspecReader> GetNuspecReaderAsync(string packageId, NuGetVersion version)
     {
-        var pack = await GetRequestPackAsync<FindPackageByIdResource>();
+        var resource = await _repository.GetResourceAsync<FindPackageByIdResource>();
         using var packageStream = new MemoryStream();
 
-        await pack.Resource.CopyNupkgToStreamAsync(
+        await resource.CopyNupkgToStreamAsync(
             packageId,
             version,
             packageStream,
             _cahge,
             _logger,
-            pack.CancellationToken);
+            CancellationToken.None);
 
         Console.WriteLine($"Downloaded package {packageId} {version}");
 
         using var packageReader = new PackageArchiveReader(packageStream);
-        return await packageReader.GetNuspecReaderAsync(pack.CancellationToken);
+        return await packageReader.GetNuspecReaderAsync(CancellationToken.None);
     }
 
     public async Task<IEnumerable<IPackageSearchMetadata>> GetMetadataAsync(string packageId)
     {
-        var pack = await GetRequestPackAsync<PackageMetadataResource>();
-        return await pack.Resource.GetMetadataAsync(
+        var resource = await _repository.GetResourceAsync<PackageMetadataResource>();
+        return await resource.GetMetadataAsync(
             packageId,
             includePrerelease: true,
             includeUnlisted: false,
             _cahge,
             _logger,
-            pack.CancellationToken);
-    }
-
-    private async Task<(T Resource, CancellationToken CancellationToken)>
-        GetRequestPackAsync<T>()
-        where T : class, INuGetResource
-    {
-        return (
-            await _repository.GetResourceAsync<T>(),
-            CancellationToken.None
-            );
+            CancellationToken.None);
     }
 }
