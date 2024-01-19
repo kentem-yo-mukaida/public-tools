@@ -65,10 +65,9 @@ foreach (var metadata in metadatas)
 
     // 脆弱性
     Console.WriteLine("--- 脆弱性 ---");
-    var vulnerabilities = metadata.Vulnerabilities ?? Array.Empty<PackageVulnerabilityMetadata>();
-    if (vulnerabilities.Any())
+    if (metadata.Vulnerabilities is { } vulnerabilities && vulnerabilities.Any())
     {
-        foreach (var vulnerability in metadata.Vulnerabilities ?? Array.Empty<PackageVulnerabilityMetadata>())
+        foreach (var vulnerability in vulnerabilities)
         {
             Console.WriteLine($"AdvisoryUrl: {vulnerability.AdvisoryUrl}");
             Console.WriteLine($"Severity: {GetVulnerabilitySeverityString(vulnerability.Severity)}");
