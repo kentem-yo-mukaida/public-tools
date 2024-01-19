@@ -18,19 +18,12 @@ internal class NugetAccesser(string source, ILogger logger)
     private readonly SourceRepository _repository = Repository.Factory.GetCoreV3(source);
 
     private readonly ILogger _logger = logger;
-
-    public async Task<T> GetAsync<T>(Func<FindPackageByIdResource, SourceCacheContext, ILogger, CancellationToken, Task<T>> action)
-    {
-        var resource = await _repository.GetResourceAsync<FindPackageByIdResource>();
-        var cache = new SourceCacheContext();
-        var cancellationToken = CancellationToken.None;
-        return await action(resource, cache, _logger, cancellationToken);
-    }
+    private readonly SourceCacheContext _cahge = new();
 
     public async Task<IEnumerable<NuGetVersion>> GetVersionsAsync(string packageId)
     {
         var pack = await GetRequestPackAsync<FindPackageByIdResource>();
-        return await pack.Resource.GetAllVersionsAsync(packageId, pack.Cache, _logger, pack.CancellationToken);
+        return await pack.Resource.GetAllVersionsAsync(packageId, _cahge, _logger, pack.CancellationToken);
     }
 
     public async Task<NuspecReader> GetNuspecReaderAsync(string packageId, NuGetVersion version)
@@ -42,7 +35,7 @@ internal class NugetAccesser(string source, ILogger logger)
             packageId,
             version,
             packageStream,
-            pack.Cache,
+            _cahge,
             _logger,
             pack.CancellationToken);
 
@@ -59,18 +52,17 @@ internal class NugetAccesser(string source, ILogger logger)
             packageId,
             includePrerelease: true,
             includeUnlisted: false,
-            pack.Cache,
+            _cahge,
             _logger,
             pack.CancellationToken);
     }
 
-    private async Task<(T Resource, SourceCacheContext Cache, CancellationToken CancellationToken)>
+    private async Task<(T Resource, CancellationToken CancellationToken)>
         GetRequestPackAsync<T>()
         where T : class, INuGetResource
     {
         return (
             await _repository.GetResourceAsync<T>(),
-            new SourceCacheContext(),
             CancellationToken.None
             );
     }

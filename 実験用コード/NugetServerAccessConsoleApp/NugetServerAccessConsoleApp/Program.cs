@@ -31,16 +31,25 @@ Console.WriteLine("");
 
 // パッケージダウンロード
 Console.WriteLine("--- パッケージダウンロード ---");
-//var packageVersion = versions.Last();
-var packageVersion = new NuGetVersion("12.0.3");
+var packageVersion = versions.Last();
 var nuspecReader = await accesser.GetNuspecReaderAsync(packageId, packageVersion);
 
 Console.WriteLine($"Tags: {nuspecReader.GetTags()}");
 Console.WriteLine($"Description: {nuspecReader.GetDescription()}");
 Console.WriteLine($"GetAuthors: {nuspecReader.GetAuthors()}");
-Console.WriteLine($"GetContentFiles: {nuspecReader.GetContentFiles()}");
+var contentFiles = nuspecReader.GetContentFiles();
 Console.WriteLine($"GetCopyright: {nuspecReader.GetCopyright()}");
+// 依存関係
+Console.WriteLine("依存関係");
 var dependencyGroups = nuspecReader.GetDependencyGroups();
+foreach (var dependencyGroup in dependencyGroups)
+{
+    Console.WriteLine($"{dependencyGroup.TargetFramework.Framework} {dependencyGroup.TargetFramework.Version}");
+    foreach (var package in dependencyGroup.Packages)
+    {
+        Console.WriteLine($"    {package.Id} : {package.VersionRange.MinVersion}");
+    }
+}
 var frameworkAssemblyGroups = nuspecReader.GetFrameworkAssemblyGroups();
 var frameworkRefGroups = nuspecReader.GetFrameworkRefGroups();
 Console.WriteLine($"GetLanguage: {nuspecReader.GetLanguage()}");
@@ -49,8 +58,8 @@ Console.WriteLine($"GetLicenseUrl: {nuspecReader.GetLicenseUrl()}");
 Console.WriteLine($"GetOwners: {nuspecReader.GetOwners()}");
 Console.WriteLine($"GetProjectUrl: {nuspecReader.GetProjectUrl()}");
 Console.WriteLine($"GetReadme: {nuspecReader.GetReadme()}");
-//Console.WriteLine($"GetReferenceGroups: {nuspecReader.GetReferenceGroups()}");
-//Console.WriteLine($"Description: {nuspecReader.GetRepositoryMetadata()}");
+var referenceGroups = nuspecReader.GetReferenceGroups();
+var repositoryMetadata = nuspecReader.GetRepositoryMetadata();
 //Console.WriteLine($"Description: {nuspecReader.GetDescription()}");
 Console.WriteLine("");
 
